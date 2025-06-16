@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "rs",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "nama": "RSUD Sukadana", "x": 558401.45, "y": 9438939.54 }, "geometry": { "type": "Point", "coordinates": [ 105.526884122879054, -5.075741912917289 ] } },
+{ "type": "Feature", "properties": { "nama": "RS Permata Hati", "x": 577948.7, "y": 9430411.5 }, "geometry": { "type": "Point", "coordinates": [ 105.703311135119449, -5.152717818667549 ] } },
+{ "type": "Feature", "properties": { "nama": "Rumah Sakit AKA Medika Sribhawono", "x": 581031.41, "y": 9412917.21 }, "geometry": { "type": "Point", "coordinates": [ 105.731307846294087, -5.310936607070772 ] } },
+{ "type": "Feature", "properties": { "nama": "RSIA IBUNDA", "x": 583865.65, "y": 9415476.16 }, "geometry": { "type": "Point", "coordinates": [ 105.756857179366264, -5.287758179486403 ] } },
+{ "type": "Feature", "properties": { "nama": "RS Ibu dan Anak Mawar", "x": 577828.42, "y": 9431544.8 }, "geometry": { "type": "Point", "coordinates": [ 105.702214690510488, -5.142467300610367 ] } }
+]
+}

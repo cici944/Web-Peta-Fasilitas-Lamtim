@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "pasar",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "nama": "Pasar Way Jepara", "x": 577684.67, "y": 9427741.99 }, "geometry": { "type": "Point", "coordinates": [ 105.700955507437257, -5.176868557301098 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Labuhan Ratu", "x": 587542.25, "y": 9381086.59 }, "geometry": { "type": "Point", "coordinates": [ 105.790441223886674, -5.598792124682543 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Purbolinggo ", "x": 555635.7, "y": 9450520.46 }, "geometry": { "type": "Point", "coordinates": [ 105.501852709674125, -4.970997684010666 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Templek", "x": 588044.38, "y": 9396321.68 }, "geometry": { "type": "Point", "coordinates": [ 105.794790903739596, -5.460975559334049 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Pekalongan", "x": 539717.73, "y": 9438174.98 }, "geometry": { "type": "Point", "coordinates": [ 105.358330575810371, -5.082773965234513 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Batanghari", "x": 541504.28, "y": 9431777.79 }, "geometry": { "type": "Point", "coordinates": [ 105.374482086486097, -5.1406363356793 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Sekampung", "x": 548153.81, "y": 9432739.39 }, "geometry": { "type": "Point", "coordinates": [ 105.434472051956263, -5.131899340605402 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Sukadana", "x": 560358.29, "y": 9440764.28 }, "geometry": { "type": "Point", "coordinates": [ 105.544523922459263, -5.059220317855146 ] } },
+{ "type": "Feature", "properties": { "nama": "Pasar Braja Harjosari", "x": 585235.09, "y": 9425328.0 }, "geometry": { "type": "Point", "coordinates": [ 105.769106069928043, -5.198625846489963 ] } }
+]
+}

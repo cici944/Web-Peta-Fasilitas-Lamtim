@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sebaran Fasilitas di Kab. Lampung Timur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map { height: 80vh; }
+    .btn-group button {
+      margin: 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    #description {
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h2>Sebaran Fasilitas di Kab. Lampung Timur</h2>
+  <p id="description">Halaman ini menampilkan sebaran berbagai fasilitas seperti pasar, tempat wisata, dan rumah sakit di wilayah Kabupaten Lampung Timur.</p>
+  <div class="btn-group">
+    <button onclick="showMarkers('rs')">Rumah Sakit</button>
+    <button onclick="showMarkers('pasar')">Pasar</button>
+    <button onclick="showMarkers('wisata')">Wisata</button>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-5.2, 105.6], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const iconOptions = {
+      pasar: L.icon({ iconUrl: 'images/pasar_icon.jpg', iconSize: [25, 25], iconAnchor: [12, 25], popupAnchor: [0, -25] }),
+      wisata: L.icon({ iconUrl: 'images/wisata_icon.png', iconSize: [25, 25], iconAnchor: [12, 25], popupAnchor: [0, -25] }),
+      rs: L.icon({ iconUrl: 'images/rs_icon.png', iconSize: [25, 25], iconAnchor: [12, 25], popupAnchor: [0, -25] })
+    };
+
+    const markerGroups = {
+      pasar: L.layerGroup(),
+      wisata: L.layerGroup(),
+      rs: L.layerGroup()
+    };
+
+    const data = {
+      pasar: [
+        {nama: "Pasar Way Jepara", coords: [-5.1768686, 105.7009555], },
+        {nama: "Pasar Labuhan Ratu", coords: [-5.5987921, 105.7904412]},
+        {nama: "Pasar Purbolinggo", coords: [-4.9709977, 105.5018527]},
+        {nama: "Pasar Templek", coords: [-5.4609756, 105.7947909]},
+        {nama: "Pasar Pekalongan", coords: [-5.0827740, 105.3583306]},
+        {nama: "Pasar Batanghari", coords: [-5.1406363, 105.3744821]},
+        {nama: "Pasar Sekampung", coords: [-5.1318993, 105.4344721]},
+        {nama: "Pasar Sukadana", coords: [-5.0592203, 105.5445239]},
+        {nama: "Pasar Braja Harjosari", coords: [-5.1986258, 105.7691061]}
+      ],
+      wisata: [
+        {nama: "Taman Nasional Way Kambas", coords: [-4.9276070, 105.7768986], gambar: "https://tnwk.pptik.id/wp-content/uploads/sites/2/2024/06/hipwee-gajah-pinterest-2-728x422-1.jpg"},
+        {nama: "Taman Purbakala Pugung Raharjo", coords: [-5.3009059, 105.5684992], gambar: "https://indonesia.go.id/assets/upload/headline/WhatsApp_Image_2023-10-25_at_18_22_45_(1)_thumb.jpeg"},
+        {nama: "Danau Way Jepara", coords: [-5.2029537, 105.6641912], gambar: "https://i0.wp.com/lantainewstv.com/wp-content/uploads/2022/01/IMG-20220102-WA0028.jpg?fit=706%2C383&ssl=1"},
+        {nama: "Danau Kemuning Kali Mesin", coords: [-5.3050015, 105.7342731], gambar: "https://radarlampung.disway.id/upload/0239ee1963a15bbb37b29bb3fca74b41.jpg"},
+        {nama: "Pantai Kerang Mas", coords: [-5.3714626, 105.8191286], gambar: "https://kelilinglampung.net/wp-content/uploads/2020/10/Pantai-Kerang-Mas-Labuhan-Maringgai-Lampung-Timur-desmonjosbur-1602765547466.jpg"},
+        {nama: "Goa Pandan Giri Mulyo", coords: [-5.3909338, 105.6699137], gambar: "https://kelilinglampung.net/wp-content/uploads/2022/01/foto-gambar-Gua-Pandan-Giri-Mulyo-Marga-Sekampung-Lampung-Timur-Yopie-Pangkey-2.jpg"},
+        {nama: "Hutan Mangrove Sriminosari", coords: [-5.3029565, 105.8290045], gambar: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsaL46R0Ec35aR4Mh69FIj2a4lAdIT3Ls-qFCc6s-R23CGnkr8IG_06vwaGckjFH-7_z67e-EghbIxzcud5weC1XlKr81oN-csVySO6G9b3H1MddHMVRe2O3DG4_i6D2x4Trwehg4yQf3N/s1600/Taman+mangrove+sriminosari+lampung+timur+katerina+blogger+%25287%2529.jpg"}
+      ],
+      rs: [
+        {nama: "RSUD Sukadana", coords: [-5.0757419, 105.5268841], gambar: " https://cdn.antaranews.com/cache/1200x800/2023/05/27/Screenshot_20230527_104445_Gallery.jpg"},
+        {nama: "RS Permata Hati", coords: [-5.1527178, 105.7033111], gambar: "https://tintainformasi.com/wp-content/uploads/2024/08/IMG20230329111813_copy_1200x540.jpg"},
+        {nama: "Rumah Sakit AKA Medika Sribhawono", coords: [-5.3109366, 105.7313078], gambar: "https://d1ojs48v3n42tp.cloudfront.net/provider_location_banner/131986_27-4-2021_18-7-26.jpeg"},
+        {nama: "RSIA IBUNDA", coords: [-5.2877582, 105.7568572], gambar: "https://goalkes-images.s3.ap-southeast-1.amazonaws.com/media/2115/alJOeWhi3RAY5QYUpotH5wIbVkOVLedkzGQMraPC.jpg"},
+        {nama: "RS Ibu dan Anak Mawar", coords: [-5.1424673, 105.7022147], gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwAqzyRv5NvE-urvDcjhw4pi76g1PLWAt4nw&s"}
+      ]
+    };
+
+    Object.entries(data).forEach(([key, items]) => {
+      items.forEach(item => {
+        const popup = `<b>Fasilitas</b><br>Jenis: ${key.charAt(0).toUpperCase() + key.slice(1)}<br>Nama: ${item.nama}` +
+                      (item.gambar ? `<br><img src='${item.gambar}' alt='${item.nama}' width='150'/>` : '');
+        const marker = L.marker(item.coords, {icon: iconOptions[key]}).bindPopup(popup);
+        markerGroups[key].addLayer(marker);
+      });
+    });
+
+    function showMarkers(type) {
+      Object.values(markerGroups).forEach(group => map.removeLayer(group));
+      map.addLayer(markerGroups[type]);
+
+      const descriptions = {
+        rs: "Berikut ini merupakan sebaran rumah sakit di Kabupaten Lampung Timur.",
+        pasar: "Berikut ini merupakan sebaran pasar di Kabupaten Lampung Timur.",
+        wisata: "Berikut ini merupakan sebaran tempat wisata di Kabupaten Lampung Timur."
+      };
+      document.getElementById('description').innerText = descriptions[type];
+    }
+
+    showMarkers('rs'); // Default view
+  </script>
+</body>
+</html>
